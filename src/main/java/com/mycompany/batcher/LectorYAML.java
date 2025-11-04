@@ -34,12 +34,11 @@ public class LectorYAML {
                     
                     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
                     
-                    List<Job> jobsLeidos = mapper.readValue(f, mapper.getTypeFactory()
-                            .constructCollectionType(List.class, Job.class));
+                    Job jobLeidos = mapper.readValue(f, Job.class);
                     
                     
                     // Pendiente comprobar si os traballos son validos
-                    listaJobs.addAll(jobsLeidos);
+                    listaJobs.add(jobLeidos);
                     
                     System.out.println("Jobs cargados de " + f.getName());
                     

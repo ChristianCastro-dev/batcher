@@ -18,29 +18,27 @@ public class Job {
     private int cpuCores;
     private int memMB;
     private int duracionMs;
+    private Recursos recursos= new Recursos();
+    private CargaTrabajo tiempoCarga = new CargaTrabajo();
 
     private enum Estado {
         NEW, READY, WAITING, RUNNING, DONE, FAILED
     };
     private Estado estado;
-    private Timestamp horaLectura;
 
-    private Timestamp horaInicio;
-    private Timestamp horaFin;
 
-    public Job(int id, String nombre, int prioridad, int cpuCores, int memMB, int duracionMs, Timestamp horaLectura, Timestamp horaInicio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.prioridad = prioridad;
-        this.cpuCores = cpuCores;
-        this.memMB = memMB;
-        this.duracionMs = duracionMs;
-        this.horaLectura = horaLectura;
-        this.horaInicio = horaInicio;
-        this.estado = Estado.NEW;
-        this.horaInicio = null;
-        this.horaFin = null;
-    }
+    public Job() {
+    this.id = 0;
+    this.nombre = "";
+    this.prioridad = 0;
+    recursos.getCpu_cores();
+    recursos.getMemoria();
+    tiempoCarga.getDuracion_ms();
+
+    this.estado = Estado.NEW;
+
+}
+
     
     public int getId() {
         return id;
@@ -66,30 +64,7 @@ public class Job {
         this.prioridad = prioridad;
     }
 
-    public int getCpuCores() {
-        return cpuCores;
-    }
-
-    public void setCpuCores(int cpuCores) {
-        this.cpuCores = cpuCores;
-    }
-
-    public int getMemMB() {
-        return memMB;
-    }
-
-    public void setMemMB(int memMB) {
-        this.memMB = memMB;
-    }
-
-    public int getDuracionMs() {
-        return duracionMs;
-    }
-
-    public void setDuracionMs(int duracionMs) {
-        this.duracionMs = duracionMs;
-    }
-
+    
     public Estado getEstado() {
         return estado;
     }
@@ -98,29 +73,6 @@ public class Job {
         this.estado = estado;
     }
 
-    public Timestamp getHoraLectura() {
-        return horaLectura;
-    }
-
-    public void setHoraLectura(Timestamp horaLectura) {
-        this.horaLectura = horaLectura;
-    }
-
-    public Timestamp getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(Timestamp startTime) {
-        this.horaInicio = startTime;
-    }
-
-    public Timestamp getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Timestamp endTime) {
-        this.horaFin = endTime;
-    }
     
 
 

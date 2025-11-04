@@ -13,7 +13,7 @@ import java.util.List;
 public class Batcher {
 
     public static void main(String[] args) {
-        List<Job> listaJobs = LectorYAML.cargarJobs(".");
+        List<Job> listaJobs = LectorYAML.cargarJobs("jobs");
         
         for (Job job : listaJobs) {
             System.out.println("Job cargado: " + job);
