@@ -37,6 +37,8 @@ public class LectorYAML {
                     List<Job> jobsLeidos = mapper.readValue(f, mapper.getTypeFactory()
                             .constructCollectionType(List.class, Job.class));
                     
+                    
+                    // Pendiente comprobar si os traballos son validos
                     listaJobs.addAll(jobsLeidos);
                     
                     System.out.println("Jobs cargados de " + f.getName());
