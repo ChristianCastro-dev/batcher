@@ -1,0 +1,27 @@
+jobs:
+  - id: 1
+    nombre: "Job1"
+    prioridad: 1
+    cpuCores: 2
+    memMB: 1024
+    duracionMs: 5000
+    horaLectura: "2025-11-04T10:00:00"
+    horaInicio: "2025-11-04T10:05:00"
+    
+  - id: 2
+    nombre: "Job2"
+    prioridad: 2
+    cpuCores: 1
+    memMB: 512
+    duracionMs: 2000
+    horaLectura: "2025-11-04T10:02:00"
+    horaInicio: "2025-11-04T10:07:00"
+    
+  - id: 3
+    nombre: "Job3"
+    prioridad: 3
+    cpuCores: 4
+    memMB: 2048
+    duracionMs: 10000
+    horaLectura: "2025-11-04T10:10:00"
+    horaInicio: "2025-11-04T10:12:00"

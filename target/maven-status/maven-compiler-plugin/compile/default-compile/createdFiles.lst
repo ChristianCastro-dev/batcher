@@ -1,0 +1,5 @@
+com\mycompany\batcher\Job$Estado.class
+com\mycompany\batcher\Job.class
+com\mycompany\batcher\JobsManager.class
+com\mycompany\batcher\LectorYAML.class
+com\mycompany\batcher\Batcher.class
