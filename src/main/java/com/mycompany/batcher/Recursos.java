@@ -14,6 +14,7 @@ class Recursos {
     private int cpu_cores;
     private String memoria;
 
+
     
 
     public int getCpu_cores() {

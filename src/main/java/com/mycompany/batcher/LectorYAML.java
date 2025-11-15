@@ -5,6 +5,7 @@
 package com.mycompany.batcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.cfg.MapperConfig;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,19 +27,40 @@ public class LectorYAML {
         }
 
         File[] archivos = carpeta.listFiles();
+        if(archivos == null){
+            return listaJobs;
+        }
         
         for (File f : archivos) {
-            if(f.toString().endsWith(".yaml")){
+            if(f.toString().endsWith(".yaml")|| f.toString().endsWith(".yml")){
                 try{
                     // Configurar maper de yaml
                     
                     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-                    
-                    Job jobLeidos = mapper.readValue(f, Job.class);
+                    Job jobLeido = mapper.readValue(f, Job.class);
                     
                     
                     // Pendiente comprobar si os traballos son validos
-                    listaJobs.add(jobLeidos);
+                    
+                    if(jobLeido.getId() == null || jobLeido.getId().isBlank()){
+                        System.out.println("Id vacio");
+                    }
+                    if(jobLeido.getNombre() == null || jobLeido.getNombre().isBlank()){
+                        System.out.println("Nombre vacio");
+                    }
+                    if(jobLeido.getPrioridad() <0 || jobLeido.getPrioridad()>4){
+                        System.out.println("Prioridad fuera de rango, se establece 0 por ir de listo");
+                        jobLeido.setPrioridad(0);
+                    }
+                    if(jobLeido.getRecursos().getCpu_cores()<1){
+                        jobLeido.setCpuCores(1);
+                    }
+                    if(jobLeido.getTiempoCarga().getDuracion_ms()<=0){
+                        System.out.println("job con tiempo de carga menor que 0");
+                    }
+                    jobLeido.normalizar();
+                    jobLeido.setEstado(Job.Estado.NEW);
+                    listaJobs.add(jobLeido);
                     
                     System.out.println("Jobs cargados de " + f.getName());
                     

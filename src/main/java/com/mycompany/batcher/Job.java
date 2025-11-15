@@ -12,48 +12,93 @@ import java.security.Timestamp;
  */
 public class Job {
 
-    private int id;
-    private String nombre;
+    private String id;
+    private String name;
     private int prioridad;
     private int cpuCores;
     private int memMB;
     private int duracionMs;
     private Recursos recursos= new Recursos();
     private CargaTrabajo tiempoCarga = new CargaTrabajo();
+    private Estado estado = Estado.NEW;
+    
 
-    private enum Estado {
+    public enum Estado {
         NEW, READY, WAITING, RUNNING, DONE, FAILED
     };
-    private Estado estado;
 
-
-    public Job() {
-    this.id = 0;
-    this.nombre = "";
-    this.prioridad = 0;
-    recursos.getCpu_cores();
-    recursos.getMemoria();
-    tiempoCarga.getDuracion_ms();
-
-    this.estado = Estado.NEW;
-
-}
-
+    public void normalizar() {
+        this.cpuCores = recursos.getCpu_cores();
+        this.memMB = transformarMemoria(recursos.getMemoria());
+        //this.durationMs = recursos.getDuracion_ms();
+    }
     
-    public int getId() {
+    public int transformarMemoria(String memoria){
+        memoria = memoria.trim().toUpperCase();
+        if (memoria.endsWith("GB")) {
+            return Integer.parseInt(memoria.replace("GB", "").trim()) * 1024;
+        } else if (memoria.endsWith("MB")) {
+            return Integer.parseInt(memoria.replace("MB", "").trim());
+        } else {
+            throw new IllegalArgumentException("Memoria distina de GB e MB " + memoria);
+        }
+    }
+    
+    public int getCpuCores() {
+        return cpuCores;
+    }
+
+    public void setCpuCores(int cpuCores) {
+        this.cpuCores = cpuCores;
+    }
+
+    public int getMemMB() {
+        return memMB;
+    }
+
+    public void setMemMB(int memMB) {
+        this.memMB = memMB;
+    }
+
+    public int getDuracionMs() {
+        return duracionMs;
+    }
+
+    public void setDuracionMs(int duracionMs) {
+        this.duracionMs = duracionMs;
+    }
+
+    public Recursos getRecursos() {
+        return recursos;
+    }
+
+    public void setRecursos(Recursos recursos) {
+        this.recursos = recursos;
+    }
+
+    public CargaTrabajo getTiempoCarga() {
+        return tiempoCarga;
+    }
+
+    public void setTiempoCarga(CargaTrabajo tiempoCarga) {
+        this.tiempoCarga = tiempoCarga;
+    }
+    
+
+      public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     public String getNombre() {
-        return nombre;
+        return name;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.name = nombre;
     }
 
     public int getPrioridad() {
@@ -71,6 +116,11 @@ public class Job {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s(p%d,%dc,%dMB)", id, prioridad, cpuCores, memMB);
     }
 
     
