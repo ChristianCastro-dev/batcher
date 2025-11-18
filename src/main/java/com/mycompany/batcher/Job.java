@@ -4,6 +4,7 @@
  */
 package com.mycompany.batcher;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.security.Timestamp;
 
 /**
@@ -13,15 +14,21 @@ import java.security.Timestamp;
 public class Job {
 
     private String id;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("priority")
     private int prioridad;
+    @JsonProperty("cpu_cores")
     private int cpuCores;
+
     private int memMB;
     private int duracionMs;
-    private Recursos recursos= new Recursos();
+    @JsonProperty("resources")
+    private Recursos recursos = new Recursos();
+    @JsonProperty("workload")
     private CargaTrabajo tiempoCarga = new CargaTrabajo();
     private Estado estado = Estado.NEW;
-    
+    private Process proceso;
 
     public enum Estado {
         NEW, READY, WAITING, RUNNING, DONE, FAILED
@@ -30,10 +37,10 @@ public class Job {
     public void normalizar() {
         this.cpuCores = recursos.getCpu_cores();
         this.memMB = transformarMemoria(recursos.getMemoria());
-        //this.durationMs = recursos.getDuracion_ms();
+        this.duracionMs = tiempoCarga.getDuracion_ms();
     }
-    
-    public int transformarMemoria(String memoria){
+
+    public int transformarMemoria(String memoria) {
         memoria = memoria.trim().toUpperCase();
         if (memoria.endsWith("GB")) {
             return Integer.parseInt(memoria.replace("GB", "").trim()) * 1024;
@@ -43,7 +50,15 @@ public class Job {
             throw new IllegalArgumentException("Memoria distina de GB e MB " + memoria);
         }
     }
-    
+
+    public Process getProceso() {
+        return proceso;
+    }
+
+    public void setProceso(Process proceso) {
+        this.proceso = proceso;
+    }
+
     public int getCpuCores() {
         return cpuCores;
     }
@@ -83,9 +98,8 @@ public class Job {
     public void setTiempoCarga(CargaTrabajo tiempoCarga) {
         this.tiempoCarga = tiempoCarga;
     }
-    
 
-      public String getId() {
+    public String getId() {
         return id;
     }
 
@@ -109,7 +123,6 @@ public class Job {
         this.prioridad = prioridad;
     }
 
-    
     public Estado getEstado() {
         return estado;
     }
@@ -117,14 +130,10 @@ public class Job {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
-        return String.format("%s(p%d,%dc,%dMB)", id, prioridad, cpuCores, memMB);
+        return id;
     }
 
-    
-
-
-    
 }

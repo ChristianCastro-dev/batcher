@@ -1,0 +1,8 @@
+id: job-008
+name: "Optimización de imágenes"
+priority: 2
+resources:
+  cpu_cores: 3
+  memory: "15 GB"
+workload:
+  duration_ms: 14000

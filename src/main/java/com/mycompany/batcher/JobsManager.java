@@ -40,4 +40,11 @@ public class JobsManager {
         listaRunning.add(job);
     }
     
+    public static void main(String[] args){
+        try {
+            Thread.sleep(Long.parseLong(args[0]));
+        } catch (InterruptedException ex) {
+            System.getLogger(JobsManager.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
 }

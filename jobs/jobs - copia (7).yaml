@@ -1,0 +1,8 @@
+id: job-007
+name: "Escaneo de virus"
+priority: 3
+resources:
+  cpu_cores: 2
+  memory: "384 MB"
+workload:
+  duration_ms: 10000

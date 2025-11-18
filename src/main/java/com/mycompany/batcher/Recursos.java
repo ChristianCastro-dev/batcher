@@ -4,6 +4,8 @@
  */
 package com.mycompany.batcher;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author Christian
@@ -12,6 +14,7 @@ class Recursos {
     
     
     private int cpu_cores;
+    @JsonProperty("memory")
     private String memoria;
 
 

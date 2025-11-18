@@ -4,11 +4,14 @@
  */
 package com.mycompany.batcher;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author Christian
  */
 class CargaTrabajo {
+    @JsonProperty("duration_ms")
     private int duracion_ms;
 
     
