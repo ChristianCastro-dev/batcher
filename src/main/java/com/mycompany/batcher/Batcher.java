@@ -31,7 +31,7 @@ public class Batcher {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println("Arrancando el BATCHER casero... (sin lambdas, como a mi me gusta)\n");
+        System.out.println("Arrancando el BATCHER )\n");
 
         // 1. Cargar todos los jobs
         List<Job> todos = LectorYAML.cargarJobs("jobs");
