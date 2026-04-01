@@ -1,0 +1,8 @@
+id: job-002
+name: "Backup incremental"
+priority: 3
+resources:
+  cpu_cores: 1
+  memory: "128 MB"
+workload:
+  duration_ms: 3000
