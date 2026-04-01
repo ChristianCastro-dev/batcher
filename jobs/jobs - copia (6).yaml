@@ -1,8 +1,0 @@
-id: job-006
-name: "Sincronización de bases de datos"
-priority: 1
-resources:
-  cpu_cores: 2
-  memory: "2 GB"
-workload:
-  duration_ms: 18000
